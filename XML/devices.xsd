@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.example.com/devices"
+        xmlns:tns="http://www.example.com/devices"
+        elementFormDefault="qualified">
+    <element name="devices">
+        <complexType>
+            <sequence>
+                <element name="device" type="tns:Device" minOccurs="0" maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="Device">
+        <sequence>
+            <element name="name" type="string"/>
+            <element name="origin" type="string"/>
+            <element name="price" type="tns:price"/>
+            <element name="type" type="tns:Type"/>
+            <element name="critical" type="boolean"/>
+        </sequence>
+    </complexType>
+
+    <simpleType name="price">
+        <restriction base="decimal">
+            <pattern value="(0|([1-9]\d*))(\.\d{1,2})?"/>
+        </restriction>
+    </simpleType>
+
+    <complexType name="Type">
+        <sequence>
+            <element name="peripheral" type="boolean"/>
+            <element name="powerUsage" type="nonNegativeInteger"/>
+            <element name="hasCooler" type="boolean"/>
+            <element name="ports" type="tns:ports">
+                <unique name="portTypeId">
+                    <selector xpath="tns:port"/>
+                    <field xpath="@type"/>
+                </unique>
+            </element>
+            <element name="components" type="tns:components">
+                <unique name="componentId">
+                    <selector xpath="tns:component"/>
+                    <field xpath="@name"/>
+                </unique>
+            </element>
+        </sequence>
+    </complexType>
+
+    <complexType name="ports">
+        <sequence>
+            <element  name="port" type="tns:port" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="port">
+        <attribute  name="type" use="required">
+            <simpleType>
+                <restriction base="string">
+                    <enumeration value="COM"/>
+                    <enumeration value="USB"/>
+                    <enumeration value="LTP"/>
+                </restriction>
+            </simpleType>
+        </attribute>
+        <attribute name="count" use="required" type="positiveInteger"/>
+    </complexType>
+
+    <complexType name="components">
+        <sequence>
+            <element name="component" type="tns:component" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="component">
+        <attribute use="required" name="name">
+            <simpleType>
+                <restriction base="string">
+                    <enumeration value="MOUSE"/>
+                    <enumeration value="KEYBOARD"/>
+                    <enumeration value="LOUDSPEAKERS"/>
+                    <enumeration value="PRINTER"/>
+                    <enumeration value="MONITOR"/>
+                </restriction>
+            </simpleType>
+        </attribute>
+    </complexType>
+</schema>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><critical xmlns:tns="http://www.example.com/devices">
+    <true>
+        <devices>
+            <device>
+                <name>Intel</name>
+                <origin>Belarus</origin>
+                <price>1200</price>
+                <type>
+                    <peripheral>true</peripheral>
+                    <powerUsage>1200</powerUsage>
+                    <hasCooler>false</hasCooler>
+                    <ports>
+                        <port type="USB" count="3"/>
+                    </ports>
+                    <components>
+                        <component name="MONITOR"/>
+                    </components>
+                </type>
+            </device>
+        </devices>
+    </true>
+    <false>
+        <devices>
+            <device>
+                <name>MSI</name>
+                <origin>USA</origin>
+                <price>78</price>
+                <type>
+                    <peripheral>true</peripheral>
+                    <powerUsage>1500</powerUsage>
+                    <hasCooler>true</hasCooler>
+                    <ports>
+                        <port type="LTP" count="1"/>
+                        <port type="COM" count="1"/>
+                        <port type="USB" count="2"/>
+                    </ports>
+                    <components>
+                        <component name="PRINTER"/>
+                        <component name="MONITOR"/>
+                    </components>
+                </type>
+            </device>
+        </devices>
+    </false>
+</critical>
